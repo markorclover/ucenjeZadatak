@@ -1,16 +1,14 @@
-import React, { useEffect, useReducer, createContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import { getList } from '../../context/asyncActions';
-import { productReducer } from '../../context/reducers';
 import * as actionCreators from '../../context/actions';
+import { ProductContext } from '../../App';
 
 import { ItemGallery } from '../../components';
 
-export const ProductContext = createContext();
-
 function ContentPage(props) {
   console.log(' ContentPage.js');
-  const [productState, dispatch] = useReducer(productReducer, {initialized: false});
+  const { productState, dispatch } = useContext(ProductContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,21 +17,14 @@ function ContentPage(props) {
     };
  
     fetchData();
+    //eslint-disable-next-line
   }, []);
 
   return (
-    <ProductContext.Provider
-      value={{
-        productState,
-        dispatch,
-      }}
-    >
       <div>
         <h1>Hello ContentPage</h1>
         {productState.initialized && <ItemGallery />}
-        <button onClick={getList}>apiCall</button>  
       </div>
-    </ProductContext.Provider>
   );
 }
 

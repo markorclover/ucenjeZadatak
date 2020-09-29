@@ -1,19 +1,39 @@
 import React, { useContext } from 'react';
 
-import Item from '../item/Item'
-import { ProductContext } from '../../containers/contentPage/ContentPage';
+import { ProductContext } from '../../App';
+import * as actionCreators from '../../context/actions';
+import Item from '../item/Item';
+import Modal from '../modal/Modal';
 
 function ItemGallery(props) {
   console.log('    ItemGallery.js');  
-  const testContext = useContext(ProductContext);
+  const { productState, dispatch } = useContext(ProductContext);
 
-  console.log('Name on server:', testContext.productState.productList[0].file[0].file.nameOnServer);
-  console.log('Price:', testContext.productState.productList[0].price);
-  console.log('Name:', testContext.productState.productList[0].name);
+  const selectItemHandler = itemId => {
+    dispatch(actionCreators.selectedItem(itemId));
+  };
+
+  const closeModalHandler = () => dispatch(actionCreators.setState('modalIsOpened', false));
+
+  const newSelectedId = newId => dispatch(actionCreators.newSelectedItem(newId));
+
+  const createItems = productState.products.map(product => {
+    return (  
+      <Item
+        key={product.id}
+        name={product.name}
+        price={product.price}
+        pictureUrl={product.pictureUrl}
+        id={product.id}
+        onClick={selectItemHandler}
+      /> 
+    );
+  });
 
   return (
     <div> 
-      <Item /> 
+      {productState.modalIsOpened && <Modal closeModalHandler={closeModalHandler} newSelectedId={newSelectedId} />}
+      { createItems }
     </div>
   );
 }
