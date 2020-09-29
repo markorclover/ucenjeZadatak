@@ -97,10 +97,11 @@ function LogIn(props) {
     errorEmail: '',
     errorPassword: '',
     errorConfirmPassword: '',
+    showPassword: false,
   });
   const history = useHistory();
   const { dispatch } = useContext(ProductContext);
-  const { email, password, confirmPassword, errorEmail, errorPassword, errorConfirmPassword } = state;
+  const { email, password, confirmPassword, errorEmail, errorPassword, errorConfirmPassword, showPassword } = state;
 
 
   const onSubmitHandler = () => {
@@ -117,6 +118,10 @@ function LogIn(props) {
       history.push('/content');
     }
   };
+
+  const onShowPasswordClickHandler = () => {
+    setState(currentState => ({...currentState, showPassword: !currentState.showPassword}));
+  };
   
   return (
     <div>
@@ -130,15 +135,15 @@ function LogIn(props) {
       {errorEmail && <p>{errorEmail}</p>}
       <p>Enter your password:</p>
       <input
-        type="text"
+        type={showPassword ? 'text' : 'password'}
         value={password}
         onChange={event => setState({...state, password: event.target.value})}
       />
-      <button onClick={() => {console.log('missingLogic');}}>Show password</button>
+      <button onClick={onShowPasswordClickHandler}>Show password</button>
       {errorPassword && <p>{errorPassword}</p>}
       <p>Confirm password:</p>
       <input
-        type="password"
+        type={showPassword ? 'text' : 'password'}
         value={confirmPassword}
         onChange={event => setState({...state, confirmPassword: event.target.value})}
       />

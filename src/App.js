@@ -1,6 +1,5 @@
 import React, { useReducer, createContext } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.css';
 
 import { productReducer } from './context/reducers';
 
