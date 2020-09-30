@@ -1,0 +1,9 @@
+.mainContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  width: 100%;
+  padding: 8px;
+  bottom: 0px;
+}

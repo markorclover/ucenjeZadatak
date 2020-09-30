@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { ProductContext } from '../../App';
 import ImageBarItem from '../imageBarItem/ImageBarItem';
 
+import styles from './ItemBar.module.css'
+
 function ImageBar({ newSelectedId }) {
   const { productState } = useContext(ProductContext);
   const { products, selectedItemId } = productState;
@@ -22,7 +24,7 @@ function ImageBar({ newSelectedId }) {
     );
   });
   return (
-    <div>
+    <div className={styles.mainContainer}>
       {createImageBar}
     </div>
   );

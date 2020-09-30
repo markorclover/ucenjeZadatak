@@ -1,12 +1,71 @@
 .mainContainer {
   display: flex;
-  position: absolute;
+  flex-direction: column;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  overflow: disable;
-  
-  border: 1px solid black;
-  
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.7);
+  align-items: center;
+  z-index: 100;
+}
+
+.contentContainer {
+  position: relative;
+  margin-top: 25vh;
+  display: flex;
+  width: 80%;
+  min-width: 500px;
+  height: 50vh;
+  background-color: white;
+  border-radius: 25px;
+}
+
+.pictureAndButtonContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  object-fit: cover;
+  max-height: 50%;
+  max-width: 50%;
+}
+
+.buttonImageLeft {
+  position: absolute;
+  height: 40%;
+  left: -4%;
+  cursor: pointer;
+}
+
+.buttonImageLeft:active {
+  opacity: 0.5;
+}
+
+.buttonImageRight {
+  position: absolute;
+  height: 40%;
+  right: -4%;
+  cursor: pointer;
+}
+
+.buttonImageRight:active {
+  opacity: 0.5;
+}
+
+.onDisabled {
+  opacity: 0.5;
+}
+
+.closeButton {
+  position: absolute;
+  height: 10%;
+  right: 5px;
+  cursor: pointer;
 }

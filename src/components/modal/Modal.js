@@ -1,8 +1,11 @@
-import React, { useContext, memo } from 'react';
+import React, { useContext, memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import disableScroll from 'disable-scroll';
+
 
 import ImageBar from '../imageBar/ImageBar';
 import { ProductContext } from '../../App';
+import { chevronLeft, chevronRight, closeX } from './assets';
 
 import styles from './Modal.module.css'
 
@@ -10,7 +13,12 @@ function Modal({ closeModalHandler, newSelectedId }) {
   console.log('     Modal.js');
 
   const { productState } = useContext(ProductContext);
-  const { products, selectedItemId } = productState
+  const { products, selectedItemId } = productState;
+
+  useEffect(() => {
+    disableScroll.on()
+    return () => disableScroll.off();
+  }, []);
 
   let selectedItemIndex = 0;
   const selectedItem = products.find((product, index) => {
@@ -18,37 +26,50 @@ function Modal({ closeModalHandler, newSelectedId }) {
     return product.id === selectedItemId
   });
 
+  const disableRight = selectedItemIndex === products.length-1;
+  const disableLeft = selectedItemIndex === 0;
+
   const onNextButtonHandler = () => {
-    const newItemId = products[selectedItemIndex + 1].id;
-    newSelectedId(newItemId);
+    if(!disableRight) {
+      const newItemId = products[selectedItemIndex + 1].id;
+      newSelectedId(newItemId);
+    }
   };
 
   const onPreviousButtonHandler = () => {
-    const newItemId = products[selectedItemIndex - 1].id;
-    newSelectedId(newItemId);
+    if(!disableLeft) {
+      const newItemId = products[selectedItemIndex - 1].id;
+      newSelectedId(newItemId);
+    }
   }
 
   return (
     <div className={styles.mainContainer}>
-      <div>
-        <button
-          style={{height: '20px', width: '60px'}}
-          disabled={selectedItemIndex === 0}
-          onClick={onPreviousButtonHandler}
-        >
-          prev
-        </button>  
-        <img src={selectedItem.pictureUrl} alt={selectedItem.name} style={{ maxWidth: 300, maxHeight: 300 }} />
-        <button
-          style={{height: '20px', width: '60px'}}
-          disabled={selectedItemIndex === products.length-1}
-          onClick={onNextButtonHandler}
-        >
-          next
-        </button>
-        <button style={{height: '20px', width: '60px'}} onClick={closeModalHandler}>Close modal</button>
+      <div className={styles.contentContainer}>
+       <img
+          src={closeX}
+          onClick={closeModalHandler}
+          alt="closeX"
+          className={styles.closeButton}
+        />  
+        <div className={styles.pictureAndButtonContainer}>
+          <img
+            src={chevronLeft}
+            onClick={onPreviousButtonHandler}
+            alt="chevronLeft"
+            className={[styles.buttonImageLeft, disableLeft && styles.onDisabled].join(' ')}
+          />
+
+          <img src={selectedItem.pictureUrl} alt={selectedItem.name} className={styles.image} />
+
+          <img
+            src={chevronRight}
+            onClick={onNextButtonHandler}
+            alt="chevronRight"
+            className={[styles.buttonImageRight, disableRight && styles.onDisabled].join(' ')} />  
+        </div>
+        <ImageBar newSelectedId={newSelectedId} />
       </div>
-      <ImageBar newSelectedId={newSelectedId} />
     </div>
   );
 }

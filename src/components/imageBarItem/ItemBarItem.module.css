@@ -1,0 +1,18 @@
+.mainContainer {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+.itemActive {
+  border: 1px solid black;
+}
+
+.image {
+  object-fit: fill;
+  height: 100%;
+}

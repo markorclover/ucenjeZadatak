@@ -1,30 +1,22 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
-const styleBase = {
-  width: '50px',
-  height: '50px',
-};
-
-const styleBorder = {
-  borderWidth: '1px',
-  borderColor: 'black',
-  borderStyle: 'solid',
-  width: '50px',
-  height: '50px',
-};
+import styles from './ItemBarItem.module.css'
 
 function ImageBarItem({ selectedItemId, pictureUrl, id, newSelectedId }) {
   console.log('     ImageBarItem.js');
   const onClickHandler = () => {
     newSelectedId(id);
   }
+
+  const itemIsSelected = selectedItemId === id;
+
   return (
     <div 
-      style={ selectedItemId === id ? styleBorder : styleBase}
+      className={styles.mainContainer}
       onClick={onClickHandler}
     >
-      <img src={pictureUrl} alt="loading" style={{ maxWidth: 50, maxHeight: 50 }} />
+      <img className={[styles.image, itemIsSelected && styles.itemActive].join(' ')} src={pictureUrl} alt="loading" />
     </div>
   );
 }

@@ -46,6 +46,7 @@
   position: absolute;
   right: 4px;
   z-index: 1;
+  cursor: pointer;
 }
 .submitButton {
   width: 250px;
