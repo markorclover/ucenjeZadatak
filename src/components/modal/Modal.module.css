@@ -17,6 +17,7 @@
   margin-top: 25vh;
   display: flex;
   width: 80%;
+  max-width: 900px;
   min-width: 500px;
   height: 50vh;
   background-color: white;
