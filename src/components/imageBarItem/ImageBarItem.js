@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 const styleBase = {
@@ -38,4 +38,4 @@ ImageBarItem.propTypes = {
 
 ImageBarItem.defaultProps = {};
 
-export default ImageBarItem;
+export default memo(ImageBarItem);

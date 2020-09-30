@@ -2,8 +2,9 @@ import React, { useContext, memo } from 'react';
 import PropTypes from 'prop-types';
 
 import ImageBar from '../imageBar/ImageBar';
-
 import { ProductContext } from '../../App';
+
+import styles from './Modal.module.css'
 
 function Modal({ closeModalHandler, newSelectedId }) {
   console.log('     Modal.js');
@@ -28,7 +29,7 @@ function Modal({ closeModalHandler, newSelectedId }) {
   }
 
   return (
-    <div>
+    <div className={styles.mainContainer}>
       <div>
         <button
           style={{height: '20px', width: '60px'}}

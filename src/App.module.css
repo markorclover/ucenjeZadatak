@@ -1,0 +1,24 @@
+.mainContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: white;
+  padding: 36px;
+  margin-bottom: 66px;
+  /* border: 1px solid black; */
+}
+
+.footerContainer {
+  display: flex;
+  position: fixed;
+  background-color: dimgrey;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  color: whitesmoke;
+  height: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

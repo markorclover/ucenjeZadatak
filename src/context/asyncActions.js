@@ -15,7 +15,7 @@ export const getList = async () => {
       })
       .then((data) => {
         if (serverStatus === 200) {
-          return data.data.products.slice(0, 5);
+          return data.data.products.slice(0, 6);
         }
         //data error
       })

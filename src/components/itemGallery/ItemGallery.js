@@ -5,6 +5,8 @@ import * as actionCreators from '../../context/actions';
 import Item from '../item/Item';
 import Modal from '../modal/Modal';
 
+import styles from './ImageGallery.module.css'
+
 function ItemGallery(props) {
   console.log('    ItemGallery.js');  
   const { productState, dispatch } = useContext(ProductContext);
@@ -31,7 +33,7 @@ function ItemGallery(props) {
   });
 
   return (
-    <div> 
+    <div className={styles.mainContainer}> 
       {productState.modalIsOpened && <Modal closeModalHandler={closeModalHandler} newSelectedId={newSelectedId} />}
       { createItems }
     </div>

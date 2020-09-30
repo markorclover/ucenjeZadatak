@@ -5,7 +5,7 @@ import { ProductContext } from '../../App';
 import { validateLogin } from './helperFunctions';
 
 class LogIn extends Component {
-  //static contextType = ProductContext;
+  \\static contextType = ProductContext;
 
   state = {
     email: 'bla.bla@asd.as',
@@ -72,6 +72,7 @@ class LogIn extends Component {
 }
 
 export default LogIn;
+
 */
 
 // Pitati Mislava za useContext u class component 
@@ -85,6 +86,10 @@ import { useHistory } from 'react-router-dom';
 
 import * as actionCreators from '../../context/actions';
 import { validateLogin } from './helperFunctions';
+
+import { eye, eyeSlash } from './assets';
+
+import styles from './LogIn.module.css';
 
 
 function LogIn(props) {  
@@ -124,32 +129,49 @@ function LogIn(props) {
   };
   
   return (
-    <div>
-      <h1>Hello</h1>
-      <p>Enter your email:</p>
-      <input
-        type="email"
-        value={email}
-        onChange={event => setState({...state, email: event.target.value})}
-      />
-      {errorEmail && <p>{errorEmail}</p>}
-      <p>Enter your password:</p>
-      <input
-        type={showPassword ? 'text' : 'password'}
-        value={password}
-        onChange={event => setState({...state, password: event.target.value})}
-      />
-      <button onClick={onShowPasswordClickHandler}>Show password</button>
-      {errorPassword && <p>{errorPassword}</p>}
-      <p>Confirm password:</p>
-      <input
-        type={showPassword ? 'text' : 'password'}
-        value={confirmPassword}
-        onChange={event => setState({...state, confirmPassword: event.target.value})}
-      />
-      {errorConfirmPassword && <p>{errorConfirmPassword}</p>}
-      <br/>
-      <button onClick={onSubmitHandler}>Submit</button>
+    <div className={styles.mainContainer}>
+      <h2>LogIn page</h2>
+      <div className={styles.splitToRow}>
+        <div className={styles.inputContainer}>
+          <p>Enter your email:</p>
+          <input
+            type="email"
+            value={email}
+            onChange={event => setState({...state, email: event.target.value})}
+          />
+        </div>
+          {errorEmail && <div className={styles.errorContainer}><p>{errorEmail}</p></div>}
+      </div>
+
+      <div className={styles.splitToRow}>
+        <div className={styles.inputContainer}>
+          <p>Enter your password:</p>
+          <div className={styles.passwordInputContainer}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={event => setState({...state, password: event.target.value})}
+            />
+            <div className={styles.iconContainer}>
+              <img src={showPassword ? eyeSlash : eye} alt="logo" width={20} onClick={onShowPasswordClickHandler} />
+            </div>            
+          </div>
+        </div>
+          {errorPassword && <div className={styles.errorContainer}><p>{errorPassword}</p></div>}
+      </div>
+
+      <div className={styles.splitToRow}>
+        <div className={styles.inputContainer}>
+          <p>Confirm password:</p>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            value={confirmPassword}
+            onChange={event => setState({...state, confirmPassword: event.target.value})}
+          />
+        </div>
+          {errorConfirmPassword && <div className={styles.errorContainer}><p>{errorConfirmPassword}</p></div>}
+      </div>
+      <button className={styles.submitButton} onClick={onSubmitHandler}>Submit</button>
     </div>
   );
   }

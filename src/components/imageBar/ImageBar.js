@@ -5,9 +5,10 @@ import { ProductContext } from '../../App';
 import ImageBarItem from '../imageBarItem/ImageBarItem';
 
 function ImageBar({ newSelectedId }) {
-  console.log('   ImageBar.js');
   const { productState } = useContext(ProductContext);
   const { products, selectedItemId } = productState;
+
+  console.log('   ImageBar.js');
 
   const createImageBar = products.map(product => {
     return (

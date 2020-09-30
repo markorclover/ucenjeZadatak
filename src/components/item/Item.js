@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+
+import styles from './Item.module.css';
 
 
 function Item({name, price, pictureUrl, id, onClick}) {
   console.log('    Item.js'); 
   return (
-    <div onClick={() => onClick(id)}>
-      <img src={pictureUrl} alt={name} style={{ maxWidth: 200, maxHeight: 200 }} />
+    <div className={styles.mainContainer} onClick={() => onClick(id)}>
       <p>{name}</p>
+      <img src={pictureUrl} alt={name} className={styles.imageContainer} />
       <p>Price: ${price}</p>
     </div> 
   );
@@ -22,4 +24,4 @@ Item.propTypes = {
 };
 
 
-export default Item;
+export default memo(Item);
